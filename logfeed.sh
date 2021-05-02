@@ -63,7 +63,7 @@ while [ -f $RUN_FLAG ]; do
 		if [ ! -z $CONTAINER_TO_KILL ]; then
 			kill_usr_container $CONTAINER_TO_KILL
 		fi
-		cat $TMP_FILE | grep "$MATCH" | grep -h -v "$INVTERTED_MATCH" | goaccess - -o $OUTPUTFILE --log-format COMBINED --persist --restore --db-path=$DATA_DIR --anonymize-ip --double-decode --ignore-crawlers --real-os --no-global-config --ignore-status=404 --ignore-panel=NOT_FOUND --ignore-panel=REFERRING_SITES --ignore-panel=REFERRERS --ignore-panel=KEYPHRASES --ignore-panel=GEO_LOCATION --no-query-string
+		cat $TMP_FILE | grep "$MATCH" | grep -h -v "$INVTERTED_MATCH" | goaccess - -o $OUTPUTFILE --log-format COMBINED --persist --restore --db-path=$DATA_DIR --anonymize-ip --double-decode --ignore-crawlers --real-os --no-global-config --ignore-status=404 --ignore-panel=NOT_FOUND --ignore-panel=REFERRING_SITES --ignore-panel=REFERRERS --ignore-panel=KEYPHRASES --ignore-panel=GEO_LOCATION --no-query-string --browsers-file=/browsers.list
 		# goaccess $TMP_FILE -o blog.html --log-format COMBINED --persist --restore --anonymize-ip --double-decode --ignore-crawlers --real-os
 		rm $TMP_FILE
 	else

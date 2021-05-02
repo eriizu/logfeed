@@ -3,7 +3,7 @@ FROM alpinelinux/docker-cli
 
 RUN apk add --no-cache goaccess
 
-COPY logfeed.sh /logfeed.sh
+COPY logfeed.sh browsers.list /
 
 VOLUME [ "/data" ]
 
