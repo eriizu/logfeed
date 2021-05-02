@@ -1,6 +1,7 @@
 services:
   blog_goaccess:
     build: .
+    # image: eriizu/logfeed
     volumes:
       - /var/log/traefik:/var/log/traefik/
       - ./output:/output
