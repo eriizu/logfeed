@@ -1,0 +1,29 @@
+services:
+  blog_goaccess:
+    build: .
+    volumes:
+      - /var/log/traefik:/var/log/traefik/
+      - ./output:/output
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - FILE_WATCHED=/var/log/traefik/access.log
+      - CONTAINER_TO_KILL=traefik
+    restart: always
+
+  access_log_server:
+    image: eriizu/darkhttpd
+    volumes:
+      - ./output:/content
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.example-stats.rule=Host(`stats.example.com`)"
+      - "traefik.http.routers.example-stats.entrypoints=websecure"
+      - "traefik.http.routers.example-stats.tls.certresolver=letsencrypt"
+      - "traefik.http.services.example-stats.loadbalancer.server.port=80"
+    command:
+      - "/content"
+      - "--port"
+      - "80"
+    restart: always
